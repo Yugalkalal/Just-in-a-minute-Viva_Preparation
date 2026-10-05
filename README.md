@@ -18,14 +18,6 @@ A zero-build static JAM viva practice app designed for GitHub + Vercel.
 - Mobile-friendly layout
 - No backend, npm install, or environment variables required
 
-## Deploy on GitHub + Vercel
-
-1. Put these files at the root of a GitHub repository.
-2. Make sure the homepage is named `index.html`.
-3. In Vercel, choose **Add New → Project** and import the GitHub repository.
-4. Leave the build settings at their static-site defaults and deploy.
-5. Every push to the connected production branch can trigger a new deployment.
-
 ## Local test
 
 Open `index.html` directly for the main UI. For PWA/service-worker testing, use a local HTTP server rather than `file://`.
