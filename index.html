@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#14213d">
+<meta name="description" content="Practice 40 JAM viva topics with timed preparation, speaking practice, progress tracking and key points.">
+<meta name="application-name" content="JAM Viva Prep">
+<meta property="og:title" content="JAM Viva Prep – 40 Topics">
+<meta property="og:description" content="Practice JAM speaking topics with 1-minute preparation and 1-minute speaking timers.">
+<meta property="og:type" content="website">
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icons/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/icons/icon-192.png">
+<title>JAM Viva Prep – 40 Topics</title>
+<style>
+:root{
+  --bg:#f2f5f9;--card:#fff;--ink:#14213d;--mute:#5a6578;--line:#d5dce8;
+  --acc:#e8a200;--acc-ink:#14213d;--ok:#1f8a5b;--danger:#c63c3c;
+  --shadow:0 10px 30px rgba(20,33,61,.08);--radius:16px;
+  color-scheme:light;
+}
+:root[data-theme="dark"]{
+  --bg:#0e1524;--card:#17213a;--ink:#eef2fa;--mute:#9aa7bf;--line:#2a3756;
+  --acc:#f2b51d;--acc-ink:#14213d;--ok:#4cc48c;--danger:#ff7777;
+  --shadow:0 12px 35px rgba(0,0,0,.25);color-scheme:dark;
+}
+@media(prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0e1524;--card:#17213a;--ink:#eef2fa;--mute:#9aa7bf;--line:#2a3756;
+    --acc:#f2b51d;--acc-ink:#14213d;--ok:#4cc48c;--danger:#ff7777;
+    --shadow:0 12px 35px rgba(0,0,0,.25);color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:20px}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  min-height:100vh;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,summary:focus-visible{
+  outline:3px solid var(--acc);outline-offset:3px;
+}
+main{max-width:820px;margin:auto;padding:22px 16px 70px}
+.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:20px}
+.brand{font-weight:800;letter-spacing:-.02em}
+.icon-btn{
+  width:44px;height:44px;border:1px solid var(--line);border-radius:12px;
+  background:var(--card);color:var(--ink);box-shadow:var(--shadow);
+}
+h1{font-size:clamp(1.8rem,6vw,2.5rem);line-height:1.05;margin:8px 0 7px;letter-spacing:-.035em}
+.sub{color:var(--mute);margin:0 0 20px}
+.hero{
+  background:var(--ink);color:var(--bg);border-radius:22px;padding:22px;
+  box-shadow:var(--shadow);margin-bottom:20px;
+}
+.hero-top{display:flex;justify-content:space-between;align-items:flex-start;gap:18px}
+.topic-no{font-size:clamp(3rem,12vw,4.6rem);font-weight:900;line-height:.9;color:var(--acc)}
+.hero h2{margin:8px 0 2px;font-size:clamp(1.2rem,4vw,1.55rem)}
+.phase{color:var(--acc);font-weight:800;min-height:1.5em;text-transform:uppercase;letter-spacing:.04em;font-size:.85rem}
+.clock{font-size:clamp(2.8rem,13vw,4.5rem);font-weight:900;font-variant-numeric:tabular-nums;line-height:1;margin:16px 0}
+.progress-track{height:8px;background:#ffffff25;border-radius:99px;overflow:hidden}
+.progress-fill{height:100%;width:100%;background:var(--acc);transition:width .25s linear}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.btn{
+  border:0;border-radius:12px;padding:11px 16px;font-weight:800;
+  background:var(--acc);color:var(--acc-ink);min-height:44px;
+}
+.btn.secondary{background:transparent;color:inherit;border:1.5px solid currentColor}
+.btn.danger{color:var(--danger);border-color:currentColor}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.keypoints{
+  margin-top:16px;padding:14px;border-radius:13px;background:#ffffff12;
+  border:1px solid #ffffff25;
+}
+.keypoints p{margin:6px 0}.keypoints ul{margin:6px 0;padding-left:1.2em}
+.status-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px
+}
+.stat{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;
+  box-shadow:var(--shadow)
+}
+.stat strong{display:block;font-size:1.4rem}.stat span{color:var(--mute);font-size:.86rem}
+.goal{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;
+  margin-bottom:20px;box-shadow:var(--shadow)
+}
+.goal-row{display:flex;justify-content:space-between;gap:12px;margin-bottom:8px}
+.goal-track{height:9px;background:var(--line);border-radius:99px;overflow:hidden}
+.goal-fill{height:100%;width:0;background:var(--ok);transition:width .25s}
+.toolbar{display:flex;gap:9px;align-items:center;margin:18px 0 12px}
+.search{
+  flex:1;min-width:0;padding:11px 13px;border-radius:12px;border:1.5px solid var(--line);
+  background:var(--card);color:var(--ink)
+}
+.count{color:var(--mute);font-weight:700;white-space:nowrap}
+.topic-list{display:grid;gap:8px}
+details{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+summary{
+  cursor:pointer;padding:13px 14px;display:flex;gap:11px;align-items:center;
+  font-weight:750;list-style:none
+}
+summary::-webkit-details-marker{display:none}
+.no{min-width:2.25em;color:var(--mute);font-weight:900}
+.topic-title{flex:1}
+.practice-toggle{
+  display:flex;align-items:center;gap:6px;color:var(--mute);font-size:.84rem;
+  white-space:nowrap
+}
+.practice-toggle input{accent-color:var(--ok);width:18px;height:18px}
+.body{padding:0 14px 15px;border-top:1px solid var(--line)}
+.body b{display:inline-block;min-width:4.1em}.body p{margin:10px 0 5px}.body ul{margin:4px 0;padding-left:1.25em}
+.empty{padding:24px;text-align:center;color:var(--mute);background:var(--card);border:1px solid var(--line);border-radius:13px}
+.tip{color:var(--mute);font-size:.92rem;margin:18px 2px}
+.modal-backdrop{
+  position:fixed;inset:0;background:#0008;display:none;place-items:center;padding:18px;z-index:20
+}
+.modal-backdrop.open{display:grid}
+.modal{
+  width:min(460px,100%);background:var(--card);color:var(--ink);border:1px solid var(--line);
+  border-radius:18px;padding:20px;box-shadow:0 25px 80px #0005
+}
+.modal h3{margin:0 0 8px}.modal p{color:var(--mute)}
+.rating{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.rate{
+  border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:12px;
+  padding:12px 6px;text-align:center
+}
+.rate.selected{border:2px solid var(--acc);background:color-mix(in srgb,var(--acc) 15%,var(--card))}
+.footer-actions{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
+.small{font-size:.85rem;color:var(--mute)}
+@media(max-width:560px){
+  main{padding:14px 12px 55px}
+  .topbar{margin-bottom:14px}
+  .hero{padding:18px;border-radius:18px}
+  .controls{display:grid;grid-template-columns:1fr 1fr}
+  .controls .wide{grid-column:1/-1}
+  .btn{width:100%}
+  .status-grid{gap:7px}.stat{padding:11px}.stat strong{font-size:1.2rem}
+  .toolbar{align-items:stretch;flex-direction:column}.count{white-space:normal}
+  .practice-toggle{font-size:0}.practice-toggle input{font-size:16px}
+  summary{padding:12px}.topic-title{line-height:1.3}
+}
+@media(prefers-reduced-motion:reduce){
+  *{scroll-behavior:auto!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+<main>
+  <header class="topbar">
+    <div class="brand">🎤 JAM Viva Prep</div>
+    <button class="icon-btn" id="themeBtn" type="button" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <h1>Practice smarter. Speak better.</h1>
+  <p class="sub">Draw a topic, think for one minute, then speak for one minute. Use key points instead of memorising a full speech.</p>
+
+  <section class="hero" aria-live="polite">
+    <div class="hero-top">
+      <div>
+        <div class="phase" id="phase">READY</div>
+        <h2 id="topicTitle">Press “Draw a chit” to begin</h2>
+      </div>
+      <div class="topic-no" id="topicNo">?</div>
+    </div>
+    <div class="clock" id="clock">01:00</div>
+    <div class="progress-track" aria-hidden="true"><div class="progress-fill" id="timerFill"></div></div>
+    <div class="controls">
+      <button class="btn wide" id="draw">🎲 Draw a chit</button>
+      <button class="btn secondary" id="pause" hidden>Pause</button>
+      <button class="btn secondary" id="finish" hidden>Finish</button>
+      <button class="btn secondary" id="skip" hidden>🎤 Start speaking</button>
+      <button class="btn secondary" id="show" hidden>Show key points</button>
+    </div>
+    <div class="keypoints" id="keypoints" hidden></div>
+  </section>
+
+  <section class="status-grid" aria-label="Practice statistics">
+    <div class="stat"><strong id="totalDone">0</strong><span>Topics practised</span></div>
+    <div class="stat"><strong id="strongCount">0</strong><span>Rated strong/excellent</span></div>
+    <div class="stat"><strong id="remaining">40</strong><span>Topics remaining</span></div>
+  </section>
+
+  <section class="goal">
+    <div class="goal-row"><strong>Today's goal</strong><span id="goalText">0 / 10</span></div>
+    <div class="goal-track"><div class="goal-fill" id="goalFill"></div></div>
+  </section>
+
+  <div class="toolbar">
+    <input class="search" id="search" type="search" placeholder="Search topics, key points or keywords…" aria-label="Search topics">
+    <span class="count" id="count">40 topics</span>
+  </div>
+
+  <div class="topic-list" id="list"></div>
+  <p class="tip"><b>JAM structure:</b> Start with a one-line introduction → give 2–3 points/examples → finish with a short conclusion. Speak from key points, not a memorised script.</p>
+  <div class="controls">
+    <button class="btn secondary" id="reset">Reset saved progress</button>
+  </div>
+</main>
+
+<div class="modal-backdrop" id="ratingModal" role="dialog" aria-modal="true" aria-labelledby="ratingTitle">
+  <div class="modal">
+    <h3 id="ratingTitle">How did you perform?</h3>
+    <p id="ratingTopic"></p>
+    <div class="rating">
+      <button class="rate" data-rating="1">😟<br>Needs work</button>
+      <button class="rate" data-rating="2">😐<br>Okay</button>
+      <button class="rate" data-rating="3">🙂<br>Good</button>
+      <button class="rate" data-rating="4">🔥<br>Excellent</button>
+    </div>
+    <div class="footer-actions">
+      <button class="btn secondary" id="cancelRating">Cancel</button>
+      <button class="btn" id="saveRating">Save & mark practised</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const T=[
+["Passive hearing vs active listening","Hearing is automatic; listening is a choice.",["Hearing is just sound reaching the ears","Active listening: eye contact, nodding, no interruption","Paraphrase and ask questions to confirm"],"Active listening builds understanding and trust."],
+["Safety standards and protocols in engineering","Standards turn experience into rules that protect lives.",["Bridge, building or plant failures often trace to ignored rules","Protocols make work repeatable and checkable","Safe design cuts costs, lawsuits and injuries"],"Cutting corners on safety always costs more later."],
+["Social media and public opinion","Many people now get news from feeds, not newspapers.",["Fast spread of news, but also of rumours","Algorithms show what we already agree with","Check sources before sharing"],"Used wisely, social media informs; used blindly, it misleads."],
+["Empathy in team conflicts","Conflicts are inevitable; how we handle them is the choice.",["Understand the other person's view before defending yours","Empathy lowers defensiveness and anger","Leads to solutions both sides accept"],"Empathy turns a clash into collaboration."],
+["Non-verbal cues and first impressions","People judge us within seconds, often before we speak.",["Eye contact shows confidence and honesty","Posture, smile and handshake add warmth","Mismatch between words and body language breaks trust"],"Our body speaks first, so make it say the right thing."],
+["Basic coding for every student","Coding is becoming a basic skill, like typing.",["Automates boring tasks, e.g. a script to sort files","Builds logical, step-by-step thinking","Useful in every field: biology, finance, design"],"You don't need to be a programmer to benefit from coding."],
+["Managing e-waste globally","Old phones and laptops are the world's fastest-growing waste stream.",["Contains toxic metals like lead and mercury","Also holds valuable gold and copper worth recovering","Needs recycling rules, repair culture and producer responsibility"],"Reduce, repair and recycle before we drown in e-waste."],
+["Constructive criticism and personal growth","Praise feels good, but criticism helps us improve.",["It shows blind spots we can't see ourselves","Specific, kind feedback is easier to act on","Accept it without taking it personally"],"Those who welcome feedback grow faster."],
+["Digital payments and shopping habits","UPI and cards have made cash optional.",["Instant, contactless and available 24/7","Encourages small, impulsive purchases","Needs caution: fraud, OTP scams, privacy"],"Digital payments bring convenience; awareness keeps it safe."],
+["Peer discussion groups","Some topics click better when a friend explains them.",["Different viewpoints fill gaps in understanding","Explaining to others strengthens your own learning","Shared motivation keeps everyone on track"],"Learning together is learning twice."],
+["Smart sensors in home appliances","Appliances now sense and adapt on their own.",["Fridges, ACs and washing machines adjust to load or temperature","Saves electricity and water","Motion sensors and IoT add comfort and security"],"Smart sensors make homes efficient and convenient."],
+["Time management and self-discipline","Clocks only show time; discipline decides how we use it.",["Planners fail without following them","Avoid distractions like phones and procrastination","Small daily habits beat last-minute rushes"],"Managing time really means managing yourself."],
+["Academic integrity and plagiarism","Integrity means your work is honestly your own.",["Plagiarism is copying without credit","It can lead to penalties and lost reputation","Cite sources and use your own words"],"Honesty today builds credibility for life."],
+["Delivering a clear presentation while nervous","Nervousness is normal, even for experienced speakers.",["Prepare key points and practise aloud","Breathe slowly and pause instead of rushing","Focus on the message, not on the fear"],"Preparation and calm breathing turn nerves into energy."],
+["Renewable energy and climate change","Burning fossil fuels is the main driver of climate change.",["Solar, wind and hydro emit almost no carbon","India's solar push reduces import dependence","Challenges: storage, cost and grid upgrades"],"Renewables are our best path to a cleaner future."],
+["Consistent daily practice for learning","Skills are built like muscles, a little every day.",["Small daily effort beats long, rare sessions","Repetition moves knowledge into long-term memory","Example: 20 minutes of a new language or tool daily"],"Consistency is more powerful than intensity."],
+["Learning from failure","Failure is feedback, not the end.",["Shows what didn't work and why","Builds resilience and humility","Many inventions, like the light bulb, came after many failures"],"Every failure is a lesson in disguise."],
+["Streaming platforms vs movie theatres","Streaming lets us watch anything, anywhere, anytime.",["Streaming: cheap, flexible, huge variety","Theatres: big screen, shared experience, sound","Both can co-exist: blockbusters in theatres, series online"],"Convenience versus experience: both have a place."],
+["Human safety and ethics in product design","A product is only good if it is safe for the people using it.",["Faulty designs, such as exploding batteries, have harmed users","Ethics means honesty about risks and avoiding harm","Testing and standards protect users"],"Good engineers put people before profit."],
+["Clean professional presence on LinkedIn","LinkedIn is often your first impression for recruiters.",["Clear photo, headline and summary","Post achievements and certifications honestly","Network politely and avoid unprofessional content"],"A clean profile opens doors before you enter the room."],
+["Fast fashion and the environment","Fast fashion means cheap clothes made and discarded quickly.",["Uses huge amounts of water and cotton","Dyes pollute rivers; synthetic fibres shed microplastics","Choose durable clothes, reuse and thrift"],"Buying less and better protects the planet."],
+["Adaptability as a critical skill","Technology and jobs change faster than ever.",["Today's skills can become outdated quickly","Adaptable people learn, unlearn and relearn","COVID-19 forced everyone to adapt to online work"],"Adaptability helps us thrive when change is constant."],
+["From sketch to physical prototype","Every product starts as a simple idea on paper.",["Sketch and define requirements","Make a CAD model or digital design","Build a prototype, test it and improve"],"Prototyping turns ideas into real, testable products."],
+["Hackathons and group projects","Hackathons put a team under real deadlines.",["Members share tasks according to strengths","Solving problems together builds trust","Win or lose, you learn collaboration and quick thinking"],"Teamwork turns individuals into a team."],
+["Urban garbage and waste management","Cities produce more waste than they can handle.",["Rapid growth, dense population and poor segregation","Landfills overflow and cause pollution and disease","Solutions: segregation at source, composting, recycling"],"Clean cities need responsible citizens and strong systems."],
+["Disagreeing respectfully with a teammate","Disagreement is healthy if handled with respect.",["Listen first and acknowledge their idea","Use \"I think…\" and give reasons, not attacks","Look for common ground or test both ideas"],"Respectful disagreement leads to better decisions."],
+["Economic growth vs environmental protection","Growth creates jobs, but it can damage nature.",["Industry and mining cause pollution and deforestation","Poor countries argue for development first","Sustainable development tries to balance both"],"We need growth that doesn't destroy our future."],
+["Public transport and sustainable cities","Too many private vehicles cause traffic and pollution.",["Buses and metros move many people with less fuel","Reduce congestion and air pollution","Affordable and accessible for all"],"Good public transport is the backbone of a sustainable city."],
+["Cloud storage: concept and benefits","Cloud storage keeps your files on remote servers via the internet.",["Access files from any device, anywhere","Automatic backup protects against lost devices","Easy sharing and collaboration, e.g. Google Drive, AWS S3"],"The cloud makes data safer and more accessible."],
+["Emotional intelligence under stress","EQ is understanding and managing emotions, ours and others'.",["Self-awareness: notice stress before it takes over","Self-control: pause before reacting","Empathy helps support the team"],"High EQ keeps us calm when it matters."],
+["Explaining technical topics to non-technical people","Experts often forget that others lack the jargon.",["Use simple words and everyday analogies","Start with why it matters, then how it works","Check understanding with questions"],"Clear explanation is a skill, not a compromise."],
+["Hands-on lab work vs theory","Theory tells us what, labs show us how.",["Experiments make concepts visible and memorable","Practice builds problem-solving and troubleshooting skills","Employers value people who can apply knowledge"],"Theory and practice together make a complete engineer."],
+["Short-term weekly goals and exam stress","Big exams feel overwhelming when seen as one mountain.",["Break the syllabus into weekly targets","Tracking progress gives confidence","Avoids last-minute panic and all-nighters"],"Small weekly wins keep stress low."],
+["Mental health awareness among students","Academic pressure and isolation affect many students.",["Stress, anxiety and burnout are common","Talking openly reduces stigma","Counselling, friends and healthy routines help"],"Caring for the mind is as important as caring for grades."],
+["Open-mindedness in diverse teams","Diverse teams bring different cultures and ideas.",["Different backgrounds lead to creative solutions","Avoid stereotypes and judging quickly","Listen before concluding"],"Open minds make diversity a strength."],
+["Automation and robotics in manufacturing","Robots now do repetitive factory work.",["Faster, accurate and tireless, e.g. car assembly lines","Safer for dangerous tasks","Raises concern about jobs, so reskilling is vital"],"Automation works best alongside skilled people."],
+["Starting mini-projects early in college","Early projects turn classroom theory into skill.",["Learn by building, e.g. a small website or app","Build a portfolio before placements","Mistakes early cost little and teach a lot"],"Start small, start early, grow steadily."],
+["Cybersecurity awareness for device users","Every smart device is a possible entry point for attackers.",["Use strong, unique passwords and 2FA","Beware phishing links and fake apps","Keep software updated"],"Awareness is the first line of defence."],
+["Flexible work-from-home options","Remote work changed how companies operate.",["Saves commute time and offers flexibility","Can cause isolation and blur work-life boundaries","Needs trust, clear goals and good tools"],"Flexibility works when paired with discipline."],
+["Body language and speaking confidence","Our body influences how we feel as well as how we look.",["Stand straight, relax shoulders","Make eye contact and use natural gestures","Smile and speak slowly"],"Confident posture helps build real confidence."]
+];
+const $ = id => document.getElementById(id);
+const STORAGE = "jam-viva-prep-v2";
+const THEME = "jam-viva-theme";
+const GOAL = 10;
+
+let state = loadState();
+let deck = [];
+let current = -1;
+let timer = null;
+let timerEnd = 0;
+let remainingSeconds = 60;
+let phaseSeconds = 60;
+let paused = false;
+let selectedRating = 0;
+let activeSearch = "";
+
+function loadState(){
+  try{
+    const saved = JSON.parse(localStorage.getItem(STORAGE) || "{}");
+    return {
+      practised: new Set(Array.isArray(saved.practised) ? saved.practised : []),
+      ratings: saved.ratings && typeof saved.ratings === "object" ? saved.ratings : {},
+      dates: saved.dates && typeof saved.dates === "object" ? saved.dates : {}
+    };
+  }catch{
+    return {practised:new Set(),ratings:{},dates:{}};
+  }
+}
+function saveState(){
+  localStorage.setItem(STORAGE, JSON.stringify({
+    practised:[...state.practised],
+    ratings:state.ratings,
+    dates:state.dates
+  }));
+}
+function todayKey(){ return new Date().toISOString().slice(0,10); }
+function todayCount(){
+  const d=todayKey();
+  return Object.values(state.dates).filter(x=>x===d).length;
+}
+function shuffle(a){
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+function ensureDeck(){
+  if(!deck.length){
+    deck=shuffle([...Array(T.length).keys()]);
+  }
+}
+function topicBody(i){
+  const t=T[i];
+  return `<p><b>Start</b>${escapeHtml(t[1])}</p>
+    <p><b>Middle</b></p>
+    <ul>${t[2].map(x=>`<li>${escapeHtml(x)}</li>`).join("")}</ul>
+    <p><b>End</b>${escapeHtml(t[3])}</p>`;
+}
+function escapeHtml(s){
+  return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
+}
+function searchable(t){
+  return [t[0],t[1],...t[2],t[3]].join(" ").toLowerCase();
+}
+function render(filter=""){
+  activeSearch=filter.trim().toLowerCase();
+  const list=T.map((t,i)=>({t,i})).filter(({t,i})=>{
+    if(!activeSearch) return true;
+    return searchable(t).includes(activeSearch) || String(i+1)===activeSearch;
+  });
+  $("count").textContent=`${list.length} ${list.length===1?"topic":"topics"}`;
+  $("list").innerHTML=list.length ? list.map(({t,i})=>`
+    <details id="topic-${i}">
+      <summary>
+        <span class="no">${i+1}</span>
+        <span class="topic-title">${escapeHtml(t[0])}</span>
+        <label class="practice-toggle" title="Mark topic as practised" onclick="event.stopPropagation()">
+          <input type="checkbox" data-i="${i}" ${state.practised.has(i)?"checked":""} aria-label="Mark ${escapeHtml(t[0])} practised">
+        </label>
+      </summary>
+      <div class="body">${topicBody(i)}</div>
+    </details>`).join("") :
+    `<div class="empty">No matching topics found.<br><span class="small">Try a topic number, title, or keyword such as “phishing”, “cloud”, or “stress”.</span></div>`;
+}
+function updateStats(){
+  const total=state.practised.size;
+  const strong=Object.values(state.ratings).filter(v=>Number(v)>=3).length;
+  const today=Math.min(todayCount(),GOAL);
+  $("totalDone").textContent=total;
+  $("strongCount").textContent=strong;
+  $("remaining").textContent=Math.max(T.length-total,0);
+  $("goalText").textContent=`${today} / ${GOAL}`;
+  $("goalFill").style.width=`${Math.min(today/GOAL*100,100)}%`;
+}
+function updateTimer(){
+  const s=Math.max(0,Math.ceil((timerEnd-Date.now())/1000));
+  remainingSeconds=s;
+  $("clock").textContent=fmt(s);
+  $("timerFill").style.width=`${Math.max(0,Math.min(100,(s/phaseSeconds)*100))}%`;
+  return s;
+}
+function fmt(s){
+  return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");
+}
+function stopTimer(){
+  if(timer){clearInterval(timer);timer=null;}
+}
+function startTimer(seconds,label,next){
+  stopTimer();
+  phaseSeconds=seconds;
+  remainingSeconds=seconds;
+  paused=false;
+  $("phase").textContent=label;
+  $("pause").textContent="Pause";
+  timerEnd=Date.now()+seconds*1000;
+  updateTimer();
+  timer=setInterval(()=>{
+    if(paused)return;
+    const s=updateTimer();
+    if(s<=0){
+      stopTimer();
+      navigator.vibrate?.([120,60,120]);
+      next();
+    }
+  },200);
+}
+function showSpeaking(){
+  $("skip").hidden=true;
+  $("pause").hidden=false;
+  $("finish").hidden=false;
+  startTimer(60,"🎤 SPEAK NOW — 1 MINUTE",()=>endSpeaking(true));
+}
+function endSpeaking(timeUp=false){
+  stopTimer();
+  $("pause").hidden=true;
+  $("finish").hidden=true;
+  $("skip").hidden=true;
+  $("phase").textContent=timeUp?"TIME'S UP":"SPEAKING FINISHED";
+  $("clock").textContent="00:00";
+  $("timerFill").style.width="0%";
+  openRating();
+}
+function openRating(){
+  selectedRating=0;
+  $("ratingTopic").textContent=T[current][0];
+  document.querySelectorAll(".rate").forEach(b=>b.classList.remove("selected"));
+  $("ratingModal").classList.add("open");
+}
+function closeRating(){ $("ratingModal").classList.remove("open"); }
+function saveRating(){
+  if(!selectedRating)return;
+  state.practised.add(current);
+  state.ratings[current]=selectedRating;
+  state.dates[current]=todayKey();
+  saveState();
+  render(activeSearch);
+  updateStats();
+  closeRating();
+}
+function draw(){
+  ensureDeck();
+  current=deck.pop();
+  $("topicNo").textContent=current+1;
+  $("topicTitle").textContent=T[current][0];
+  $("keypoints").hidden=true;
+  $("show").hidden=false;
+  $("show").textContent="Show key points";
+  $("skip").hidden=false;
+  $("pause").hidden=true;
+  $("finish").hidden=true;
+  $("draw").textContent="🎲 Draw another chit";
+  startTimer(60,"🧠 PREPARE — 1 MINUTE",showSpeaking);
+}
+$("draw").addEventListener("click",draw);
+$("skip").addEventListener("click",showSpeaking);
+$("finish").addEventListener("click",()=>endSpeaking(false));
+$("pause").addEventListener("click",()=>{
+  paused=!paused;
+  if(!paused) timerEnd=Date.now()+remainingSeconds*1000;
+  $("pause").textContent=paused?"Resume":"Pause";
+  $("phase").textContent=paused?"⏸ PAUSED":($("phase").textContent.includes("SPEAK")?"🎤 SPEAK NOW — 1 MINUTE":"🧠 PREPARE — 1 MINUTE");
+});
+$("show").addEventListener("click",()=>{
+  const hidden=$("keypoints").hidden;
+  $("keypoints").hidden=!hidden;
+  if(hidden){
+    $("keypoints").innerHTML=topicBody(current);
+    $("show").textContent="Hide key points";
+  }else $("show").textContent="Show key points";
+});
+$("search").addEventListener("input",e=>render(e.target.value));
+$("list").addEventListener("change",e=>{
+  if(!e.target.matches('input[data-i]'))return;
+  const i=Number(e.target.dataset.i);
+  if(e.target.checked){
+    state.practised.add(i);
+    state.dates[i]=todayKey();
+  }else{
+    state.practised.delete(i);
+    delete state.ratings[i];
+    delete state.dates[i];
+  }
+  saveState(); updateStats();
+});
+document.querySelectorAll(".rate").forEach(b=>b.addEventListener("click",()=>{
+  selectedRating=Number(b.dataset.rating);
+  document.querySelectorAll(".rate").forEach(x=>x.classList.toggle("selected",x===b));
+}));
+$("saveRating").addEventListener("click",saveRating);
+$("cancelRating").addEventListener("click",closeRating);
+$("ratingModal").addEventListener("click",e=>{if(e.target===$("ratingModal"))closeRating();});
+$("reset").addEventListener("click",()=>{
+  if(confirm("Reset all saved JAM practice progress and ratings?")){
+    stopTimer();
+    localStorage.removeItem(STORAGE);
+    state={practised:new Set(),ratings:{},dates:{}};
+    deck=[];current=-1;
+    $("topicNo").textContent="?";
+    $("topicTitle").textContent='Press “Draw a chit” to begin';
+    $("phase").textContent="READY";
+    $("clock").textContent="01:00";
+    $("timerFill").style.width="100%";
+    $("draw").textContent="🎲 Draw a chit";
+    $("show").hidden=true;$("skip").hidden=true;$("pause").hidden=true;$("finish").hidden=true;
+    $("keypoints").hidden=true;
+    render(activeSearch);updateStats();
+  }
+});
+function setTheme(theme){
+  if(theme==="system") document.documentElement.removeAttribute("data-theme");
+  else document.documentElement.dataset.theme=theme;
+  localStorage.setItem(THEME,theme);
+  $("themeBtn").textContent=theme==="dark"?"☀️":"🌙";
+}
+$("themeBtn").addEventListener("click",()=>{
+  const currentTheme=localStorage.getItem(THEME)||"system";
+  setTheme(currentTheme==="dark"?"light":"dark");
+});
+const savedTheme=localStorage.getItem(THEME)||"system";
+setTheme(savedTheme);
+
+if("serviceWorker" in navigator){
+  window.addEventListener("load",()=>navigator.serviceWorker.register("/sw.js").catch(()=>{}));
+}
+render();updateStats();
+</script>
+</body>
+</html>
